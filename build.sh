@@ -89,6 +89,7 @@ fi
 ########## CLEARING FOLDER ##########
 [[ $RM_GIT = true ]] && rm ./.git;
 rm -rf ./src/project/*
+rm -rf ./src/project/.*
 [[ $RM_GIT = false ]] && git checkout src/project/.gitkeep
 #####################################
 
