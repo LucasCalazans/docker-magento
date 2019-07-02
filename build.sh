@@ -86,9 +86,11 @@ then
 fi
 #################################
 
-#### REMOVING .gitkeep ####
-[ -f src/project/.gitkeep ] && rm ./src/project/.gitkeep;
-###########################
+########## CLEARING FOLDER ##########
+[[ $RM_GIT = true ]] && rm ./.git;
+rm -rf ./src/project/*
+[[ $RM_GIT = false ]] && git checkout src/project/.gitkeep
+#####################################
 
 #### UPDATING .env ####
 sed -i -e "s/HOST_NAME/$HOST/g" ./.env
