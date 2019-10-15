@@ -119,7 +119,12 @@ server {
 		fastcgi_pass_header Set-Cookie;
 		fastcgi_pass_header Cookie;
 		fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
-		}
+
+		# Accept OPTIONS
+        #add_header 'Access-Control-Allow-Origin' '*' always;
+        #add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
+        #add_header 'Access-Control-Allow-Headers' 'DNT,Authorization,X-CustomHeader,Keep-Alive,User-Agent,Origin,Referer,X-HTTP-Method-Override,X-Accept-Charset,X-Accept,Accept,Access-Control-Request-Method,Access-Control-Request-Headers,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type' always;
+    }
 	
 	## Block other undefined php files, possible injections and random malware hooks.
 	location ~* \.php$ { return 404; }
