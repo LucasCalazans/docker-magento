@@ -9,15 +9,14 @@ services:
     volumes:
       - ./src:/var/www/html
       - ./config/nginx:/etc/nginx
-      - ./scripts/nginx-config.sh:/usr/local/bin/nginx-config.sh
     depends_on:
       - php
-    command: sh -c "chmod +x /usr/local/bin/nginx-config.sh && nginx-config.sh"
     networks:
       - frontend
       - backend
   php:
-    image: luderson/php:7.1
+    build:
+      context: ./config/php
     env_file: .env
     volumes:
       - ./src:/var/www/html
@@ -26,8 +25,9 @@ services:
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
       - cron_files:/var/spool/cron/crontabs/
       - ./config/composer/auth.json:/var/www/.composer/auth.json
+      - ~/.ssh:/var/www/.ssh
     user: www-data
-    working_dir: /var/www/html/project
+    working_dir: /var/www/html
     networks:
       - backend
   cron:
